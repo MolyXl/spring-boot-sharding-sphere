@@ -5,8 +5,10 @@ import com.google.common.collect.Lists;
 import com.oujiong.entity.User;
 import com.oujiong.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.PostConstruct;
@@ -39,11 +41,14 @@ public class UserController {
         userList.add(new User(3L,"妈妈", "女", 28));
         userList.add(new User(4L,"爷爷", "男", 64));
         userList.add(new User(5L,"奶奶", "女", 62));
+        userList.add(new User(6L,"dd", "女", 61));
+        userList.add(new User(6L,"dd", "女", 61));
     }
     /**
      * @Description: 批量保存用户
      */
-    @PostMapping("save-user")
+    @RequestMapping("save-user")
+    @Transactional
     public Object saveUser() {
         return userService.insertForeach(userList);
     }
